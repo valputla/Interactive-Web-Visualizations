@@ -18,15 +18,15 @@ function init(){
         console.log(data);
       });
       
-    Plotly.newPlot("plot", data);
+    // Plotly.newPlot("plot", data);
 
-    // create dropdown/select
-    d3.selectAll("#selDataset").on("change", updatePlotly);
+    // // create dropdown/select
+    // d3.selectAll("#selDataset").on("change", updatePlotly);
 
-    // run functions to generate plots
-    createScatter('940')
-    createBar('940')
-    createSummary('940')
+    // // run functions to generate plots
+    // createScatter('940')
+    // createBar('940')
+    // createSummary('940')
 
 }
 
