@@ -4,7 +4,6 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 // SAMPLE STRUCTURE
 // 1.  Check inspector console to see if each function is running on page load
 
-
 // function that contains instructions at page load/refresh
 // function does not run until called
 function init(){
@@ -14,43 +13,50 @@ function init(){
     console.log(dataPromise);
     console.log("The Init() function ran");
 
-    d3.json(url).then(function(data) {
+   let myJSON = d3.json(url).then(function(data) {
         console.log(data);
       });
 
-    let data = [{
-        x: [940, 941, 943, 944],
-        y: [1167, 3540, 922, 2745], 
-        type: 'bar'
-      }];
-      Plotly.newPlot("plot", data);
+      // How do I parse out specific parts of the JSON?? Object.values? data.names? data[0]?
+
+        // createBar('940')
+    function createBar ('940'){
+      data = [{
+        x: [],
+        y: [], 
+        type: "bar"
+      }]
+
+    };
+
+    Plotly.newPlot("plot", data);
   
-    // // // run functions to generate plots
-    // createScatter('940')
-    function createScatter(){
+    // // // // run functions to generate plots
+    // // createScatter('940')
+    // function createScatter('940'){
 
-    };
-
-
-    // createBar('940')
-    function createBar (){
-
-    };
+    // };
 
 
-    // createSummary('940')
-    function createSummary() {
+    // // createBar('940')
+    // function createBar ('940'){
 
-    };
+    // };
 
 
-    // // // create dropdown/select
-    d3.selectAll("#selDataset").on("change", updatePlotly);
-    function updatePlotly() {
-      let dropdownMenu = d3.select("#selDataset");
-      let dataset = dropdownMenu.property("value");
-      let x = [];
-      let y = [];
+    // // createSummary('940')
+    // function createSummary('940') {
+
+    // };
+
+
+    // // // // create dropdown/select
+    // d3.selectAll("#selDataset").on("change", updatePlotly);
+    // function updatePlotly() {
+    //   let dropdownMenu = d3.select("#selDataset");
+    //   let dataset = dropdownMenu.property("value");
+    //   let x = [];
+    //   let y = [];
       // if (dataset === 'dataset1') {
       //   x = [1, 2, 3, 4, 5];
       //   y = [1, 2, 4, 8, 16];
@@ -62,9 +68,9 @@ function init(){
       // // Note the extra brackets around 'x' and 'y'
       // Plotly.restyle("plot", "x", [x]);
       // Plotly.restyle("plot", "y", [y]);
-    }
+}
     
-  }
+  
 
   
 // function that runs whenever the dropdown is changed
