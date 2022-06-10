@@ -17,19 +17,56 @@ function init(){
     d3.json(url).then(function(data) {
         console.log(data);
       });
-      
-    // Plotly.newPlot("plot", data);
 
-    // // create dropdown/select
-    // d3.selectAll("#selDataset").on("change", updatePlotly);
-
-    // // run functions to generate plots
+    let data = [{
+        x: [940, 941, 943, 944],
+        y: [1167, 3540, 922, 2745], 
+        type: 'bar'
+      }];
+      Plotly.newPlot("plot", data);
+  
+    // // // run functions to generate plots
     // createScatter('940')
+    function createScatter(){
+
+    };
+
+
     // createBar('940')
+    function createBar (){
+
+    };
+
+
     // createSummary('940')
+    function createSummary() {
 
-}
+    };
 
+
+    // // // create dropdown/select
+    d3.selectAll("#selDataset").on("change", updatePlotly);
+    function updatePlotly() {
+      let dropdownMenu = d3.select("#selDataset");
+      let dataset = dropdownMenu.property("value");
+      let x = [];
+      let y = [];
+      // if (dataset === 'dataset1') {
+      //   x = [1, 2, 3, 4, 5];
+      //   y = [1, 2, 4, 8, 16];
+      // }
+      // else if (dataset === 'dataset2') {
+      //   x = [10, 20, 30, 40, 50];
+      //   y = [1, 10, 100, 1000, 10000];
+      // }
+      // // Note the extra brackets around 'x' and 'y'
+      // Plotly.restyle("plot", "x", [x]);
+      // Plotly.restyle("plot", "y", [y]);
+    }
+    
+  }
+
+  
 // function that runs whenever the dropdown is changed
 // this function is in the HTML and is called with an input called 'this.value'
 // that comes from the select element (dropdown)
