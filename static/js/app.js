@@ -1,5 +1,5 @@
-const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
+const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
 // SAMPLE STRUCTURE
 // 1.  Check inspector console to see if each function is running on page load
@@ -15,21 +15,24 @@ function init(){
 
    let myJSON = d3.json(url).then(function(data) {
         console.log(data);
-      });
+        console.log(data.names);
 
-      // How do I parse out specific parts of the JSON?? Object.values? data.names? data[0]?
+        let names = data.names;
+    for(let i=0; i<names.length; i++){
+      let option_sel = d3.select("#selDataset")
+      option_sel.append("option").text(names[i]).attr("value", names[i]);
 
-        // createBar('940')
-    function createBar ('940'){
-      data = [{
-        x: [],
-        y: [], 
-        type: "bar"
-      }]
+    } });
 
-    };
+    //     // createBar('940')
+    // function createBar ('940'){
+    //  
+    //     
+    //   }]
 
-    Plotly.newPlot("plot", data);
+    // };
+
+    // Plotly.newPlot("plot", data);
   
     // // // // run functions to generate plots
     // // createScatter('940')
