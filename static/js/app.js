@@ -24,6 +24,20 @@ function init(){
 
     } });
 
+  //   function alertMe(){
+
+  //     // Below, two methods for getting the select element value
+  //     // Select DOM node
+  //     let val = d3.select("#cars").node().value;
+  //     console.log(`Node Selection is ${val}`);
+  //     alert(`Node Selection is ${val}`);
+  
+  //     // Select the element property
+  //     let valAlt = d3.select("#cars").property("value");
+  //     console.log(`Property Selection is ${valAlt}`);
+  //     alert(`Property Selection is ${valAlt}`);
+  // }
+
     //     // createBar('940')
     // function createBar ('940'){
     //  
