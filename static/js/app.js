@@ -1,11 +1,6 @@
 
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
-// SAMPLE STRUCTURE
-// 1.  Check inspector console to see if each function is running on page load
-
-// function that contains instructions at page load/refresh
-// function does not run until called
 function init(){
     // code that runs once (only on page load or refresh)
     const dataPromise = d3.json(url);
@@ -14,15 +9,42 @@ function init(){
     console.log("The Init() function ran");
 
    let myJSON = d3.json(url).then(function(data) {
-        console.log(data);
-        console.log(data.names);
+        // console.log(data);
+        // console.log(data.names);
+
+        let samples = data.samples;
 
         let names = data.names;
     for(let i=0; i<names.length; i++){
       let option_sel = d3.select("#selDataset")
       option_sel.append("option").text(names[i]).attr("value", names[i]);
+    }
+  let patient_id = "940"
+  let results = samples.filter(i => i.id == patient_id);
+  // let results_sorted = results.sort()
+  console.log(results[0]);
 
-    } });
+  let x = results[0].otu_ids; 
+  let y = results[0].sample_values;
+  let z = results[0].otu_labels;
+  let y_sliced = y.slice(0,10).reverse();
+  let x_sliced = x.slice(0,10).reverse();
+  let z_sliced = z.slice(0,10).reverse();
+  console.log(x_sliced);
+  console.log(y_sliced);
+
+  createBar(x_sliced,y_sliced, z_sliced);
+
+  // }
+
+  // function createBar(id){
+//     // code that makes bar chart at id='bar'
+
+//     // checking to see if function is running
+//     console.log(`This function generates bar chart of ${id} `)
+
+
+     });
 
   //   function alertMe(){
 
@@ -31,18 +53,39 @@ function init(){
   //     let val = d3.select("#cars").node().value;
   //     console.log(`Node Selection is ${val}`);
   //     alert(`Node Selection is ${val}`);
-  
-  //     // Select the element property
-  //     let valAlt = d3.select("#cars").property("value");
+      //     // Select the element property
+  //     function alertMe(){
+  //     let valAlt = d3.select("#selDataset").property("value");
   //     console.log(`Property Selection is ${valAlt}`);
   //     alert(`Property Selection is ${valAlt}`);
-  // }
 
     //     // createBar('940')
-    // function createBar ('940'){
-    //  
-    //     
-    //   }]
+    function createBar(x, y, z){
+      let trace1 = {
+        x: y,
+        y: x,
+        text: z,
+        name: "Greek",
+        type: "bar",
+        orientation: "h"
+      };
+      
+      let traceData = [trace1];
+      
+      // Apply a title to the layout
+      let layout = {
+        title: "Greek gods search results",
+        margin: {
+          l: 100,
+          r: 100,
+          t: 100,
+          b: 100
+        }
+      };
+      
+      Plotly.newPlot("bar", traceData, layout);
+        
+      }
 
     // };
 
