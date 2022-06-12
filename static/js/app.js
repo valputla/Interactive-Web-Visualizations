@@ -11,8 +11,9 @@ function init(){
    let myJSON = d3.json(url).then(function(data) {
         // console.log(data);
         // console.log(data.names);
-
+        // console.log(data.metadata[0]);
         let samples = data.samples;
+        let demo_info = data.metadata[0];
 
         let names = data.names;
     for(let i=0; i<names.length; i++){
@@ -29,11 +30,13 @@ function init(){
   let y_sliced = y.slice(0,10).reverse();
   let x_sliced = x.slice(0,10).map(i => `"OTU ${i}"`).reverse();
   let z_sliced = z.slice(0,10).reverse();
+  
   console.log(x_sliced);
   console.log(y_sliced);
 
   createBar(x_sliced,y_sliced, z_sliced);
   createBubble(x, y, z);
+  createSummary(patient_id);
      });
 
 function createBar(x, y, z){
@@ -46,8 +49,7 @@ function createBar(x, y, z){
   };
   
   let traceData = [trace1];
-  
-  // Apply a title to the layout
+
   let layout = {
     title: "Top 10 OTUs Found in a Given Indivdual",
     margin: {
@@ -66,7 +68,7 @@ function createBubble(x, y, z){
   let trace2 = {
     x: x,
     y: y,
-    // text: z,
+    text: z,
     mode: 'markers',
     marker: {
       size: y, 
@@ -84,6 +86,10 @@ function createBubble(x, y, z){
   
   Plotly.newPlot("bubble", data, layout);
 };
+
+function createSummary(patient_id){
+  console.log(demo_info);
+}
 
   
     // // // // run functions to generate plots
@@ -134,37 +140,11 @@ function createBubble(x, y, z){
 // function optionChanged(newID){
 //     // code that updates graphics
 //     // one way is to recall each function
-//     createScatter(newID)
+//     createBubble(newID)
 //     createBar(newID)
 //     createSummary(newID)
 
 // }
-
-// function createScatter(id){
-//     // code that makes scatter plot at id='bubble'
-
-//     // checking to see if function is running
-//     console.log(`This function generates scatter plot of ${id} `)
-// }
-
-// function createBar(id){
-//     // code that makes bar chart at id='bar'
-
-//     // checking to see if function is running
-//     console.log(`This function generates bar chart of ${id} `)
-
-// }
-
-// function createSummary(id){
-//     // code that makes list, paragraph, text/linebreaks at id='sample-meta'
-
-//     // checking to see if function is running
-//     console.log(`This function generates summary info of ${id} `)
-// }
-
-
-// function called, runs init instructions
-// runs only on load and refresh of browser page
 init();
 
 
