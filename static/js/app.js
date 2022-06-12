@@ -21,75 +21,70 @@ function init(){
     }
   let patient_id = "940"
   let results = samples.filter(i => i.id == patient_id);
-  // let results_sorted = results.sort()
   console.log(results[0]);
 
   let x = results[0].otu_ids; 
   let y = results[0].sample_values;
   let z = results[0].otu_labels;
   let y_sliced = y.slice(0,10).reverse();
-  let x_sliced = x.slice(0,10).reverse();
+  let x_sliced = x.slice(0,10).map(i => `"OTU ${i}"`).reverse();
   let z_sliced = z.slice(0,10).reverse();
   console.log(x_sliced);
   console.log(y_sliced);
 
   createBar(x_sliced,y_sliced, z_sliced);
-
-  // }
-
-  // function createBar(id){
-//     // code that makes bar chart at id='bar'
-
-//     // checking to see if function is running
-//     console.log(`This function generates bar chart of ${id} `)
-
-
+  createBubble(x, y, z);
      });
 
-  //   function alertMe(){
+function createBar(x, y, z){
+  let trace1 = {
+    x: y,
+    y: x,
+    text: z,
+    type: "bar",
+    orientation: "h"
+  };
+  
+  let traceData = [trace1];
+  
+  // Apply a title to the layout
+  let layout = {
+    title: "Top 10 OTUs Found in a Given Indivdual",
+    margin: {
+      l: 75,
+      r: 75,
+      t: 75,
+      b: 75
+    }
+  };
+  
+  Plotly.newPlot("bar", traceData, layout);
+    
+  };
 
-  //     // Below, two methods for getting the select element value
-  //     // Select DOM node
-  //     let val = d3.select("#cars").node().value;
-  //     console.log(`Node Selection is ${val}`);
-  //     alert(`Node Selection is ${val}`);
-      //     // Select the element property
-  //     function alertMe(){
-  //     let valAlt = d3.select("#selDataset").property("value");
-  //     console.log(`Property Selection is ${valAlt}`);
-  //     alert(`Property Selection is ${valAlt}`);
+function createBubble(x, y, z){
+  let trace2 = {
+    x: x,
+    y: y,
+    // text: z,
+    mode: 'markers',
+    marker: {
+      size: y, 
+      color: x
+    }
+  };
+  var data = [trace2];
+  
+  var layout = {
+    title: "Sample Values of Microbes in the Human Belly Button",
+    showlegend: false,
+    height: 500,
+    width: 1000
+  };
+  
+  Plotly.newPlot("bubble", data, layout);
+};
 
-    //     // createBar('940')
-    function createBar(x, y, z){
-      let trace1 = {
-        x: y,
-        y: x,
-        text: z,
-        name: "Greek",
-        type: "bar",
-        orientation: "h"
-      };
-      
-      let traceData = [trace1];
-      
-      // Apply a title to the layout
-      let layout = {
-        title: "Greek gods search results",
-        margin: {
-          l: 100,
-          r: 100,
-          t: 100,
-          b: 100
-        }
-      };
-      
-      Plotly.newPlot("bar", traceData, layout);
-        
-      }
-
-    // };
-
-    // Plotly.newPlot("plot", data);
   
     // // // // run functions to generate plots
     // // createScatter('940')
@@ -174,3 +169,15 @@ init();
 
 
 
+//   function alertMe(){
+
+  //     // Below, two methods for getting the select element value
+  //     // Select DOM node
+  //     let val = d3.select("#cars").node().value;
+  //     console.log(`Node Selection is ${val}`);
+  //     alert(`Node Selection is ${val}`);
+      //     // Select the element property
+  //     function alertMe(){
+  //     let valAlt = d3.select("#selDataset").property("value");
+  //     console.log(`Property Selection is ${valAlt}`);
+  //     alert(`Property Selection is ${valAlt}`);
