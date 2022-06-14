@@ -11,13 +11,16 @@ function init(){
    let myJSON = d3.json(url).then(function(data) {
         // console.log(data);
         // console.log(data.names);
-        ;
+        
+        // creates IDs into the dropdown menu
         let samples = data.samples;
         let names = data.names;
     for(let i=0; i<names.length; i++){
       let option_sel = d3.select("#selDataset")
       option_sel.append("option").text(names[i]).attr("value", names[i]);
     }
+
+    // charts for patient ID '940'
   let patient_id = "940"
   let results = samples.filter(i => i.id == patient_id);
   console.log(results[0]);
@@ -31,16 +34,18 @@ function init(){
   
   // console.log(x_sliced);
   // console.log(y_sliced);
-        let demo_info = data.metadata;
-    for(let i=0; i<demo_info.length; i++){
-      let option_select = d3.select(".panel-body")
-      option_select.append("option").text(demo_info[i]).attr("value", demo_info[i]);
-}
+
+
+      // let option_select = d3.select(".panel-body")
+      // option_select.append("option").text(demo_info[i]).attr("value", demo_info[i]);
 
 
   createBar(x_sliced,y_sliced, z_sliced);
   createBubble(x, y, z);
-  createSummary();
+  createSummary(value);
+  // createDemographics(value)
+  // optionChanged(value);
+
      });
 
 function createBar(x, y, z){
@@ -91,11 +96,21 @@ function createBubble(x, y, z){
   Plotly.newPlot("bubble", data, layout);
 };
 
-function createSummary(){
-  console.log(demo_info[i]);
-};
 
-  
+
+// function createSummary(ID){
+//   for(i=0; i<metadata.length; i++){
+//     if (ID !=)
+//   };
+
+
+
+// }
+// function optionChanged(newID){
+//     createBubble(newID)
+//     createBar(newID)
+//     createSummary(newID)
+// };
    
 
 
@@ -118,10 +133,27 @@ function createSummary(){
       // Plotly.restyle("plot", "x", [x]);
       // Plotly.restyle("plot", "y", [y]);
 }
-    
+
+// function createSummary(value) {
+// let demo_info = [];
+// d3.json(url).then(function(data) {
+//   for(let i=0; i < 10; i++){
+//     demo_info.push(data.metadata[i]);
+// }
+//   console.log(demo_info);
+//   let demo_chart_data = "";
+//   for (let i=0; i < metadata.length; i++){
+//     if (value == demo_chart_data[i].id){
+//       demo_chart_data = demo_info[i];
+//     }
+//   }
+//   console.log("Demo Data", demo_chart_data);
+//         let demo_select = d3.select('#sample-metadata');
+//         demo_select.html("ID: " + demo_chart_data.id + "<br> ethnicity: " + demo_chart_data.ethnicity + "<br> gender: " + demo_chart_data.gender + "<br> age: " + demo_chart_data.age + "<br> location: " + demo_chart_data.location + "<br> bbtype: " + demo_chart_data.bbtype + "<br> wfreq: " + demo_chart_data.wfreq);
   
 
-  
+// });
+
 // function that runs whenever the dropdown is changed
 // this function is in the HTML and is called with an input called 'this.value'
 // that comes from the select element (dropdown)
@@ -135,7 +167,26 @@ function createSummary(){
 // }
 init();
 
-
+function createSummary(value) {
+  let demo_info = [];
+  d3.json(url).then(function(data) {
+    for(let i=0; i < 10; i++){
+      demo_info.push(data.metadata[i]);
+  }
+    console.log(demo_info);
+    let demo_chart_data = "";
+    for (let i=0; i < metadata.length; i++){
+      if (value == demo_chart_data[i].id){
+        demo_chart_data = demo_info[i];
+      }
+    }
+    console.log("Demo Data", demo_chart_data);
+          let demo_select = d3.select('#sample-metadata');
+          demo_select.html("ID: " + demo_chart_data.id + "<br> ethnicity: " + demo_chart_data.ethnicity + "<br> gender: " + demo_chart_data.gender + "<br> age: " + demo_chart_data.age + "<br> location: " + demo_chart_data.location + "<br> bbtype: " + demo_chart_data.bbtype + "<br> wfreq: " + demo_chart_data.wfreq);
+    
+  
+  });
+}
 
 //   function alertMe(){
 
@@ -149,3 +200,14 @@ init();
   //     let valAlt = d3.select("#selDataset").property("value");
   //     console.log(`Property Selection is ${valAlt}`);
   //     alert(`Property Selection is ${valAlt}`);
+  
+  
+//   function optionChanged(value) {
+//     if (value != "Select ID") {
+//         createBarChart(value);
+//         createBubbleChart(value);
+//         createDemographics(value);
+//     }
+// };
+
+
