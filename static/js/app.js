@@ -11,10 +11,8 @@ function init(){
    let myJSON = d3.json(url).then(function(data) {
         // console.log(data);
         // console.log(data.names);
-        // console.log(data.metadata[0]);
+        ;
         let samples = data.samples;
-        let demo_info = data.metadata[0];
-
         let names = data.names;
     for(let i=0; i<names.length; i++){
       let option_sel = d3.select("#selDataset")
@@ -31,12 +29,18 @@ function init(){
   let x_sliced = x.slice(0,10).map(i => `"OTU ${i}"`).reverse();
   let z_sliced = z.slice(0,10).reverse();
   
-  console.log(x_sliced);
-  console.log(y_sliced);
+  // console.log(x_sliced);
+  // console.log(y_sliced);
+        let demo_info = data.metadata;
+    for(let i=0; i<demo_info.length; i++){
+      let option_select = d3.select(".panel-body")
+      option_select.append("option").text(demo_info[i]).attr("value", demo_info[i]);
+}
+
 
   createBar(x_sliced,y_sliced, z_sliced);
   createBubble(x, y, z);
-  createSummary(patient_id);
+  createSummary();
      });
 
 function createBar(x, y, z){
@@ -87,28 +91,12 @@ function createBubble(x, y, z){
   Plotly.newPlot("bubble", data, layout);
 };
 
-function createSummary(patient_id){
-  console.log(demo_info);
-}
+function createSummary(){
+  console.log(demo_info[i]);
+};
 
   
-    // // // // run functions to generate plots
-    // // createScatter('940')
-    // function createScatter('940'){
-
-    // };
-
-
-    // // createBar('940')
-    // function createBar ('940'){
-
-    // };
-
-
-    // // createSummary('940')
-    // function createSummary('940') {
-
-    // };
+   
 
 
     // // // // create dropdown/select
