@@ -35,14 +35,22 @@ function init(){
   // console.log(x_sliced);
   // console.log(y_sliced);
 
-
-      // let option_select = d3.select(".panel-body")
-      // option_select.append("option").text(demo_info[i]).attr("value", demo_info[i]);
-
+      let demo_info = data.metadata.filter(i => i.id == patient_id);
+      console.log(`This is demo info ${demo_info[0].length}`);
+      Object.entries(demo_info[0]).forEach(([key, value])=> {
+        let option_select = d3.select(".panel-body");
+        option_select.append("p").text(`${key.toUpperCase()}: ${value}`);
+      });
+    // for(let i=0; i<demo_info[0].length; i++){
+    //   let option_select = d3.select(".panel-body")
+    //   option_select.append("p").text("hello");
+    // }
 
   createBar(x_sliced,y_sliced, z_sliced);
   createBubble(x, y, z);
-  createSummary(value);
+  // createGauge(x, y);
+  // createSummary(value);
+
   // createDemographics(value)
   // optionChanged(value);
 
@@ -97,6 +105,20 @@ function createBubble(x, y, z){
 };
 
 
+// function createGauge(x, y, z){
+//   let trace3 = 	{
+//     domain: { x: [0, 1], y: [0, 1] },
+//   value: 270
+//   title: { text: "Speed" },
+//   type: "indicator",
+//   mode: "gauge+number"
+// }};
+//   var dataGauge =[trace3]
+
+//   var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+//   Plotly.newPlot("gauge", trace3, layout);
+
+// ];
 
 // function createSummary(ID){
 //   for(i=0; i<metadata.length; i++){
@@ -114,43 +136,8 @@ function createBubble(x, y, z){
    
 
 
-    // // // // create dropdown/select
-    // d3.selectAll("#selDataset").on("change", updatePlotly);
-    // function updatePlotly() {
-    //   let dropdownMenu = d3.select("#selDataset");
-    //   let dataset = dropdownMenu.property("value");
-    //   let x = [];
-    //   let y = [];
-      // if (dataset === 'dataset1') {
-      //   x = [1, 2, 3, 4, 5];
-      //   y = [1, 2, 4, 8, 16];
-      // }
-      // else if (dataset === 'dataset2') {
-      //   x = [10, 20, 30, 40, 50];
-      //   y = [1, 10, 100, 1000, 10000];
-      // }
-      // // Note the extra brackets around 'x' and 'y'
-      // Plotly.restyle("plot", "x", [x]);
-      // Plotly.restyle("plot", "y", [y]);
 }
 
-// function createSummary(value) {
-// let demo_info = [];
-// d3.json(url).then(function(data) {
-//   for(let i=0; i < 10; i++){
-//     demo_info.push(data.metadata[i]);
-// }
-//   console.log(demo_info);
-//   let demo_chart_data = "";
-//   for (let i=0; i < metadata.length; i++){
-//     if (value == demo_chart_data[i].id){
-//       demo_chart_data = demo_info[i];
-//     }
-//   }
-//   console.log("Demo Data", demo_chart_data);
-//         let demo_select = d3.select('#sample-metadata');
-//         demo_select.html("ID: " + demo_chart_data.id + "<br> ethnicity: " + demo_chart_data.ethnicity + "<br> gender: " + demo_chart_data.gender + "<br> age: " + demo_chart_data.age + "<br> location: " + demo_chart_data.location + "<br> bbtype: " + demo_chart_data.bbtype + "<br> wfreq: " + demo_chart_data.wfreq);
-  
 
 // });
 
@@ -167,26 +154,26 @@ function createBubble(x, y, z){
 // }
 init();
 
-function createSummary(value) {
-  let demo_info = [];
-  d3.json(url).then(function(data) {
-    for(let i=0; i < 10; i++){
-      demo_info.push(data.metadata[i]);
-  }
-    console.log(demo_info);
-    let demo_chart_data = "";
-    for (let i=0; i < metadata.length; i++){
-      if (value == demo_chart_data[i].id){
-        demo_chart_data = demo_info[i];
-      }
-    }
-    console.log("Demo Data", demo_chart_data);
-          let demo_select = d3.select('#sample-metadata');
-          demo_select.html("ID: " + demo_chart_data.id + "<br> ethnicity: " + demo_chart_data.ethnicity + "<br> gender: " + demo_chart_data.gender + "<br> age: " + demo_chart_data.age + "<br> location: " + demo_chart_data.location + "<br> bbtype: " + demo_chart_data.bbtype + "<br> wfreq: " + demo_chart_data.wfreq);
+// function createSummary(value) {
+//   let demo_info = [];
+//   d3.json(url).then(function(data) {
+//     for(let i=0; i < 10; i++){
+//       demo_info.push(data.metadata[i]);
+//   }
+//     console.log(demo_info);
+//     let demo_chart_data = "";
+//     for (let i=0; i < metadata.length; i++){
+//       if (value == demo_chart_data[i].id){
+//         demo_chart_data = demo_info[i];
+//       }
+//     }
+//     console.log("Demo Data", demo_chart_data);
+//           let demo_select = d3.select('#sample-metadata');
+//           demo_select.html("ID: " + demo_chart_data.id + "<br> ethnicity: " + demo_chart_data.ethnicity + "<br> gender: " + demo_chart_data.gender + "<br> age: " + demo_chart_data.age + "<br> location: " + demo_chart_data.location + "<br> bbtype: " + demo_chart_data.bbtype + "<br> wfreq: " + demo_chart_data.wfreq);
     
   
-  });
-}
+//   });
+// }
 
 //   function alertMe(){
 
